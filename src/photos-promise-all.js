@@ -4,18 +4,18 @@ const photosUrl = "https://jsonplaceholder.typicode.com/photos";
 
 const getPhotos = async () => {
   try {
-    const res = Promise.all([
-      `${photosUrl}/5`,
-      `${photosUrl}/20`,
-      `${photosUrl}/44`,
+    const res = await Promise.all([
+      axios({ url: `${photosUrl}/15`, method: "GET" }),
+      axios({ url: `${photosUrl}/25`, method: "GET" }),
+      axios({ url: `${photosUrl}/35`, method: "GET" }),
     ]);
-    return res.map((item) => item.url);
+    return res.map((item) => item["data"]);
   } catch (err) {
     console.error(err);
   }
 };
 
 (async () => {
-  await getPhotos();
-  console.log("End of code");
+  const photos = await getPhotos();
+  console.log(photos);
 })();
